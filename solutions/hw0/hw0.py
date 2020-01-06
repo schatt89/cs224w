@@ -50,8 +50,44 @@ def main():
     print("%d nodes with in-degree more than %d" % (count, 10))
 
     print("#### Part 2 ####")
+    
+    DegToCntV = snap.TIntPrV()
+    snap.GetOutDegCnt(g, DegToCntV)
+    count = []
+    degree = []
+    for item in DegToCntV:
+        count.append(item.GetVal2())
+        degree.append(item.GetVal1())
 
-    snap.PlotOutDegDistr(g, "smdfn", 'dlfjdl')
+    count = np.log10(np.array(count))
+    degree = np.log10(np.array(degree))
+
+    degree = degree[1:]
+    count = count[1:]
+    
+    import matplotlib.pyplot as plt
+
+    plt.plot(degree, count, '-ro')
+    plt.title("Out-degree distribution")
+    plt.ylabel("log of count")
+    plt.xlabel("log of out-degree")
+    #plt.show()
+    
+    ## polyfit 
+
+    z = np.polyfit(count, degree, deg = 1)
+
+    y = count * z[0] + z[1]
+
+    plt.plot(degree, count, '-ro')
+    plt.plot(y, count, '-b')
+    plt.title("Out-degree distribution")
+    plt.ylabel("log of count")
+    plt.xlabel("log of out-degree")
+    plt.show()
+
+    print(z)
+    
 
 if __name__ == "__main__":
     main()
