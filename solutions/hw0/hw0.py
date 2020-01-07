@@ -71,7 +71,7 @@ def main():
     plt.title("Out-degree distribution")
     plt.ylabel("log of count")
     plt.xlabel("log of out-degree")
-    #plt.show()
+    plt.show()
     
     ## polyfit 
 
