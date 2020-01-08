@@ -111,6 +111,24 @@ def main():
     
     print("The nodes with indices", nodes[np.argpartition(pgr, -3)[-3:]], "are the most center with the following PageRank values respectively:")
     print(pgr[np.argpartition(pgr, -3)[-3:]])
+
+    NIdHubH = snap.TIntFltH()
+    NIdAuthH = snap.TIntFltH()
+    snap.GetHits(g, NIdHubH, NIdAuthH)
+    nodes = []
+    hubs = []
+    auth = []
+    for item in NIdHubH:
+        nodes.append(item)
+        hubs.append(NIdHubH[item])
+    for item in NIdAuthH:
+        auth.append(NIdAuthH[item])
+    nodes = np.array(nodes)
+    hubs = np.array(hubs)
+    auth = np.array(auth)
+
+    print("The nodes with indices", nodes[np.argpartition(hubs, -3)[-3:]], "are the top 3 hubs")
+    print("The nodes with indices", nodes[np.argpartition(auth, -3)[-3:]], "are the top 3 authorities")
     
 
 if __name__ == "__main__":
