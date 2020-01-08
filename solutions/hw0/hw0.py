@@ -71,7 +71,7 @@ def main():
     plt.title("Out-degree distribution")
     plt.ylabel("log of count")
     plt.xlabel("log of out-degree")
-    plt.show()
+    #plt.show()
     
     ## polyfit 
 
@@ -84,9 +84,21 @@ def main():
     plt.title("Out-degree distribution")
     plt.ylabel("log of count")
     plt.xlabel("log of out-degree")
-    plt.show()
+    #plt.show()
 
     print(z)
+
+    print("#### Part 3 ####")
+
+    g = snap.LoadEdgeList(snap.PNGraph, '/Users/anna/Documents/repositories/cs224w/data/stackoverflow-Java.txt', 0, 1)
+    Components = snap.TCnComV()
+    snap.GetWccs(g, Components)
+    print("Number of weakly-connected components is", len(Components))
+
+    MxWcc = snap.GetMxWcc(g)
+    print("Number of edges in the maximal weakly connected component is", MxWcc.GetEdges())
+    print("Number of nodes in the maximal weakly connected component is", MxWcc.GetNodes())
+
     
 
 if __name__ == "__main__":
