@@ -99,6 +99,18 @@ def main():
     print("Number of edges in the maximal weakly connected component is", MxWcc.GetEdges())
     print("Number of nodes in the maximal weakly connected component is", MxWcc.GetNodes())
 
+    PRankH = snap.TIntFltH()
+    snap.GetPageRank(g, PRankH)
+    nodes = []
+    pgr = []
+    for item in PRankH:
+        nodes.append(item)
+        pgr.append(PRankH[item])
+    nodes = np.array(nodes)
+    pgr = np.array(pgr)
+    
+    print("The nodes with indices", nodes[np.argpartition(pgr, -3)[-3:]], "are the most center with the following PageRank values respectively:")
+    print(pgr[np.argpartition(pgr, -3)[-3:]])
     
 
 if __name__ == "__main__":
