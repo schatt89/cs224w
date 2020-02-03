@@ -7,6 +7,7 @@
 import snap
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
 # Setup
 erdosRenyi = None
@@ -26,6 +27,20 @@ def genErdosRenyi(N=5242, E=14484):
     ############################################################################
     # TODO: Your code here!
     Graph = None
+
+    nodes = np.arange(N)
+    edges = []
+    for i in len(nodes):
+        possible = nodes[:i] + nodes[i+1:]
+        node_edges = []
+        for j in len(possible):
+            edge = [nodes[i], possible[j]]
+            node_edges.append(edge)
+        edges += node_edges
+    edges = set(frozenset(k) for k in edges)
+    edges = list(edges)
+    edges = random.choice(edges, k = E)
+
 
     ############################################################################
     return Graph
